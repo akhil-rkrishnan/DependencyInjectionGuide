@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'dagger.hilt.android.plugin'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -60,10 +62,21 @@ dependencies {
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
 
-    implementation "io.insert-koin:koin-android:3.2.0-beta-1"
-    implementation "io.insert-koin:koin-androidx-navigation:3.2.0-beta-1"
-    implementation "io.insert-koin:koin-androidx-compose:3.2.0-beta-1"
-    testImplementation "io.insert-koin:koin-test-junit4:3.2.0-beta-1"
+    //Hilt dependencies
+    def hiltAndroidXVersion = "1.0.0-alpha02"
+    def hiltVersion = "2.38.1"
+    implementation "com.google.dagger:hilt-android:$hiltVersion"
+    kapt "com.google.dagger:hilt-android-compiler:$hiltVersion"
+    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$hiltAndroidXVersion"
+    kapt "androidx.hilt:hilt-compiler:$hiltAndroidXVersion"
+
+    // Activity KTX for viewModels()
+    implementation "androidx.activity:activity-ktx:1.4.0"
+
+
+    // Coroutine Lifecycle Scopes
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.4.1"
 
     // Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'

@@ -3,6 +3,7 @@ package app.android.diguide.presentation
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -17,31 +18,17 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import app.android.diguide.ui.theme.DependencyInjectionGuideTheme
 import app.android.diguide.utils.ifNotNull
-import org.koin.android.ext.android.inject
-import org.koin.androidx.scope.activityScope
-import org.koin.androidx.viewmodel.ext.android.getViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.koin.core.qualifier.named
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-    // initialise viewmodel
 
-    private val viewModel by viewModel<MainViewModel>()
-    //OR
-    // private val viewModel by inject<MainViewModel>()
-
-    // inject the scope.
-    private val scope by activityScope()
-    private val scopeH by inject<String>(named("h"))
-    private val scopeW by inject<String>(named("w"))
-
+    private val viewModel by viewModels<MainViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             DependencyInjectionGuideTheme {
-                // we can initialize viewmodel as below also
-                // val vm = getViewModel<MainViewModel>()
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = Color.White
