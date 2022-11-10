@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import app.android.diguide.model.ApiModel
 import app.android.diguide.repository.MainRepository
 import dagger.hilt.android.HiltAndroidApp
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
@@ -15,7 +16,7 @@ import javax.inject.Inject
 
 private const val TAG = "MainViewModel"
 
-@HiltAndroidApp
+@HiltViewModel
 class MainViewModel @Inject constructor(
     private val mainRepository: MainRepository
 ) : ViewModel() {
