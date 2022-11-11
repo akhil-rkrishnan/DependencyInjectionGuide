@@ -10,6 +10,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Qualifier
 import javax.inject.Singleton
 
 @Module
@@ -26,7 +27,25 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideMainRepository(apiInterface: ApiInterface): MainRepository = MainRepositoryImpl(apiInterface)
+    fun provideMainRepository(apiInterface: ApiInterface): MainRepository =
+        MainRepositoryImpl(apiInterface)
 
+    @FirstString
+    @Provides
+    @Singleton
+    fun providesFirstString(): String = "This is the first string"
+
+    @SecondString
+    @Provides
+    @Singleton
+    fun providesSecondString(): String = "This is the second string"
 
 }
+
+@Retention(AnnotationRetention.BINARY)
+@Qualifier
+annotation class FirstString
+
+@Retention(AnnotationRetention.BINARY)
+@Qualifier
+annotation class SecondString

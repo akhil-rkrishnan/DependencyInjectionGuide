@@ -1,6 +1,7 @@
 package app.android.diguide.presentation
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -16,17 +17,31 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import app.android.diguide.di.FirstString
+import app.android.diguide.di.SecondString
 import app.android.diguide.ui.theme.DependencyInjectionGuideTheme
 import app.android.diguide.utils.ifNotNull
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+private const val TAG = "MainActivity"
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     private val viewModel by viewModels<MainViewModel>()
 
+    @Inject
+    @FirstString
+    lateinit var firstString: String
+
+    @Inject
+    @SecondString
+    lateinit var secondString: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.d(TAG, "onCreate: firstString $firstString")
+        Log.d(TAG, "onCreate: secondString $secondString")
         setContent {
             DependencyInjectionGuideTheme {
                 Surface(
