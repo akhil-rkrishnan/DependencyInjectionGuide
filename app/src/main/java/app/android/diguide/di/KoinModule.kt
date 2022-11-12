@@ -39,7 +39,7 @@ val activityModule = module {
   scope<MainActivity> {
       // use qualifiers to return multiple instances of same data type.
       // To differentiate the same data type, other wise koin is confused which data type to return
-      scoped(qualifier = named("h")) { "hello" }
-      scoped(qualifier = named("w")) { "world" }
+      scoped(qualifier = named("firstString")) { "hello" }
+      scoped(qualifier = named("secondString")) { "world" }
   }
 }

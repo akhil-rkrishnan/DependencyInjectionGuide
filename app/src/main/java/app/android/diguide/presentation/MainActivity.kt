@@ -32,8 +32,8 @@ class MainActivity : ComponentActivity() {
 
     // inject the scope.
     private val scope by activityScope()
-    private val scopeH by inject<String>(named("h"))
-    private val scopeW by inject<String>(named("w"))
+    private val scopeH by inject<String>(named("firstString"))
+    private val scopeW by inject<String>(named("secondString"))
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,6 +46,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = Color.White
                 ) {
+
                     val items = viewModel.apiData.value
                     items.ifNotNull { datas ->
                         LazyColumn {
