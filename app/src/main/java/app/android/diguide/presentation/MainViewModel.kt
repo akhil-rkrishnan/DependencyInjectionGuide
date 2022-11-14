@@ -28,6 +28,8 @@ class MainViewModel(
         doANetworkCall()
     }
 
+    fun getTestString() = "hello"
+
     private fun doANetworkCall() {
         viewModelScope.launch {
             try {
